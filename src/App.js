@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { calculateRank, calculateRating, getHighscores } from './statsUtils.js';
 
+
 function App() {
   const [stats, setStats] = useState(null);
 
@@ -81,6 +82,11 @@ function App() {
     rcperc = (roundsCompleted / parseInt(totalRounds) * 100).toFixed(0);
     rfperc = (roundsForfeited / parseInt(totalRounds) * 100).toFixed(0);
 
+    if (!parseInt(totalRounds)) {
+      rcperc = 0
+      rfperc = 0;
+    }
+
     akpr = (parseInt(kills) / roundsCompleted).toFixed(2);
     adpr = (parseInt(deaths) / roundsCompleted).toFixed(2);
 
@@ -109,11 +115,17 @@ function App() {
     highscoreRank = getHighscores(user.toLowerCase());
   }
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="App">
       <div className="input-container">
-        <input id="userInput" type="text" placeholder="Enter username" />
-        <button onClick={handleSubmit}>Generate</button>
+        <input id="userInput" type="text" placeholder="Enter username" onKeyPress={handleKeyPress}/>
+        <button id="btn" onClick={handleSubmit}>Generate</button>
       </div>
       <div className="statgen-container">
         {stats ? (
