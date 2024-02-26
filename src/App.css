@@ -3,7 +3,10 @@
 }
 
 .input-container {
-  margin-bottom: 20px;
+  position: absolute;
+  top: calc(50% - 105px); /* Adjust the top position as needed */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .InputContainer input {
@@ -44,13 +47,19 @@
   position: absolute;
   width: 687px;
   height: 156px;
-  top: 13%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-image: url('./bgs/targa.png');
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .statgen-container {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
 }
 
 .stats-container {
@@ -212,6 +221,3 @@
 .banned-container img {
   opacity: 0.7;
 }
-
-
-
